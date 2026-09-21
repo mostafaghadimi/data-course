@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>دورهٔ رایگان مهندسی داده و هوش مصنوعی</title>
+    <meta
+      name="description"
+      content="دورهٔ رایگان و آنلاین مهندسی داده و هوش مصنوعی. فرم را پر کنید تا در تلگرام با شما در تماس باشیم."
+    />
+    <meta name="theme-color" content="#f7f3ed" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#14110e" media="(prefers-color-scheme: dark)" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Vazirmatn:wght@400;500;600;700&display=swap"
+    />
+
+    <style>
+      /* ---------------------------------------------------------------------
+         Editorial cream + ink + one warm signal-orange accent. Light default,
+         dark via prefers-color-scheme.
+      --------------------------------------------------------------------- */
+      :root {
+        color-scheme: light;
+        --bg: #f7f3ed;
+        --bg-elevated: #faf6f0;
+        --bg-soft: #efe8dd;
+        --bg-inset: #e8ddd0;
+        --fg: #1a1715;
+        --fg-muted: #5c544c;
+        --fg-subtle: #8b8278;
+        --rule: #d8cfc3;
+        --rule-strong: #b8aea3;
+        --accent: #cc5500;
+        --accent-soft: #fcd9bd;
+        --accent-ink: #7a3500;
+        --selection: #ffd9b3;
+        --sink: #15803d;
+        --font-sans: "Vazirmatn", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+        --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          color-scheme: dark;
+          --bg: #14110e;
+          --bg-elevated: #1d1a16;
+          --bg-soft: #25211b;
+          --bg-inset: #100e0b;
+          --fg: #faf6f0;
+          --fg-muted: #b8aea3;
+          --fg-subtle: #8b8278;
+          --rule: #2d2924;
+          --rule-strong: #443d34;
+          --accent: #ff7a40;
+          --accent-soft: #5a2900;
+          --accent-ink: #ffb380;
+          --selection: #7a3500;
+          --sink: #4ade80;
+        }
+      }
+
+      * { box-sizing: border-box; }
+      html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+      body {
+        margin: 0;
+        min-height: 100dvh;
+        background: var(--bg);
+        color: var(--fg);
+        font-family: var(--font-sans);
+        line-height: 1.5;
+        background-image: repeating-linear-gradient(
+          135deg,
+          transparent 0 7px,
+          color-mix(in srgb, var(--fg) 1.6%, transparent) 7px 8px
+        );
+      }
+      ::selection { background: var(--selection); color: var(--fg); }
+      :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+      #stream-bg {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .wrap { max-width: 62rem; margin: 0 auto; padding: 0 1.5rem; }
+
+      /* Terminal-log eyebrow */
+      .log-line {
+        display: inline-flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.625rem;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--fg-muted);
+      }
+      .log-line .stage { color: var(--accent); font-weight: 600; letter-spacing: 0.04em; }
+      .log-line .prompt { color: var(--fg-subtle); }
+      .log-line .cmd { color: var(--fg); font-weight: 500; }
+
+      /* Live pulse dot */
+      .dot-pulse {
+        position: relative;
+        display: inline-block;
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        background: var(--accent);
+      }
+      .dot-pulse::after {
+        content: "";
+        position: absolute;
+        inset: -3px;
+        border-radius: 50%;
+        background: var(--accent);
+        opacity: 0.35;
+        animation: pulse 2.4s ease-out infinite;
+      }
+      @keyframes pulse {
+        0% { transform: scale(0.6); opacity: 0.45; }
+        100% { transform: scale(2.4); opacity: 0; }
+      }
+
+      /* Cornered-frame panel */
+      .frame {
+        position: relative;
+        background: var(--bg-elevated);
+        border: 1px solid var(--rule);
+        padding: 1.5rem;
+      }
+      .frame::before,
+      .frame::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-color: var(--accent);
+        border-style: solid;
+        border-width: 0;
+      }
+      .frame::before { top: -1px; left: -1px; border-top-width: 1.5px; border-left-width: 1.5px; }
+      .frame::after { bottom: -1px; right: -1px; border-bottom-width: 1.5px; border-right-width: 1.5px; }
+
+      /* Hero */
+      .hero { padding: 5rem 0 3.5rem; }
+      .status {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.5rem 1.25rem;
+        margin-bottom: 2.5rem;
+        font-size: 0.9rem;
+        color: var(--fg-subtle);
+      }
+      .status .live { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--fg-muted); }
+      .status b { color: var(--fg); font-weight: 500; }
+      .eyebrow {
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        color: var(--fg-subtle);
+        margin: 0 0 1rem;
+      }
+      h1 {
+        margin: 0;
+        max-width: 20ch;
+        font-size: clamp(2.5rem, 7vw, 4.5rem);
+        font-weight: 700;
+        line-height: 1.15;
+        letter-spacing: -0.01em;
+      }
+      h1 .accent { color: var(--accent); }
+      .lead {
+        margin: 1.5rem 0 0;
+        max-width: 52ch;
+        font-size: clamp(1.05rem, 2.5vw, 1.2rem);
+        color: var(--fg-muted);
+        line-height: 1.9;
+      }
+      .lead b { color: var(--fg); font-weight: 600; }
+
+      @media (prefers-reduced-motion: reduce) {
+        .dot-pulse::after { animation: none; }
+        html { scroll-behavior: auto; }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="stream-bg" aria-hidden="true"></canvas>
+
+    <main class="wrap">
+      <section class="hero">
+        <div class="status">
+          <span class="live"><span class="dot-pulse" aria-hidden="true"></span> ثبت‌نام باز است</span>
+          <span><b>رایگان</b></span>
+          <span>آنلاین</span>
+        </div>
+
+        <p class="eyebrow">دورهٔ رایگان مهندسی داده و هوش مصنوعی</p>
+        <h1>مهندسی داده و هوش مصنوعی، <span class="accent">رایگان</span>.</h1>
+        <p class="lead">
+          این دوره رایگان است و قرار است در فضای آنلاین با هم گپ بزنیم. برای این‌که
+          دوره‌ای مؤثر برای کسانی باشد که وقت می‌گذارند، فرم زیر را پر کنید تا در
+          <b>تلگرام</b> با شما در تماس باشیم.
+        </p>
+      </section>
+    </main>
+
+    <script>
+      // Ambient event-stream background: slow drifting dots. ~0 CPU, respects
+      // prefers-reduced-motion, re-reads the accent so dark mode swaps for free.
+      (function () {
+        var canvas = document.getElementById("stream-bg");
+        if (!canvas) return;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        var ctx = canvas.getContext("2d", { alpha: true });
+        if (!ctx) return;
+
+        var width = 0, height = 0, dpr = 1, raf = 0;
+        var particles = [];
+
+        function resize() {
+          dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+          width = window.innerWidth;
+          height = window.innerHeight;
+          canvas.width = Math.floor(width * dpr);
+          canvas.height = Math.floor(height * dpr);
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+        function seed() {
+          var count = Math.max(40, Math.min(110, Math.floor((width * height) / 22000)));
+          particles.length = 0;
+          for (var i = 0; i < count; i++) {
+            particles.push({
+              x: Math.random() * width,
+              y: Math.random() * height,
+              v: 0.1 + Math.random() * 0.35,
+              r: 0.6 + Math.random() * 1.6,
+              a: 0.05 + Math.random() * 0.2,
+            });
+          }
+        }
+        function accent() {
+          return (getComputedStyle(document.documentElement).getPropertyValue("--accent") || "#cc5500").trim();
+        }
+        var color = accent();
+        function draw() {
+          ctx.clearRect(0, 0, width, height);
+          ctx.fillStyle = color;
+          for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+            p.x += p.v;
+            if (p.x - p.r > width) { p.x = -p.r; p.y = Math.random() * height; }
+            ctx.globalAlpha = p.a;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.globalAlpha = 1;
+          raf = requestAnimationFrame(draw);
+        }
+        window.addEventListener("resize", function () { resize(); seed(); });
+        window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () {
+          color = accent();
+        });
+        resize();
+        seed();
+        raf = requestAnimationFrame(draw);
+      })();
+    </script>
+  </body>
+</html>
