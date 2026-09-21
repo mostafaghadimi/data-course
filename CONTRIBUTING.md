@@ -8,12 +8,12 @@
 {
   "name": "اسم تو",
   "linkedin": "https://www.linkedin.com/in/username/",
-  "avatar": "assets/your-photo.jpg"
+  "avatar": "https://example.com/your-photo.jpg"
 }
 ```
 
 - فقط `name` لازمه؛ `linkedin` و `avatar` اختیاری‌ان.
+- برای `avatar` یک **لینکِ مستقیمِ عکس** بذار (مثلاً آواتار گیت‌هابت: `https://github.com/USERNAME.png`).
 - اگه `avatar` نذاری، حروف اول اسمت نشون داده می‌شه.
-- برای عکس، یا لینک مستقیم بده یا فایل رو توی پوشهٔ `assets/` بذار و مسیرش رو بنویس.
 
 ۲. یک Pull Request بزن. همین.
