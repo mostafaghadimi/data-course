@@ -175,6 +175,24 @@
       .enroll-head .cap { font-size: 0.75rem; color: var(--fg-subtle); }
       .enroll .frame { max-width: 40rem; }
 
+      /* Participants & mentors — coming soon */
+      .soon { padding: 0 0 6rem; }
+      .soon h2 {
+        margin: 0 0 1.25rem;
+        font-size: clamp(1.5rem, 4vw, 2rem);
+        font-weight: 700;
+      }
+      .soon-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6rem;
+        max-width: 40rem;
+        padding: 3rem 1.5rem;
+        color: var(--fg-muted);
+        font-size: 1.1rem;
+      }
+
       .field {
         display: flex;
         flex-direction: column;
@@ -322,6 +340,21 @@
           </form>
           <!-- Outside the form so it stays visible after the form is hidden -->
           <p id="f-msg" class="msg" role="status" aria-live="polite" hidden></p>
+        </div>
+      </section>
+
+      <section class="soon">
+        <div class="enroll-head">
+          <span class="log-line" dir="ltr">
+            <span class="stage">[TEAM]</span>
+            <span class="prompt">$</span>
+            <span class="cmd">./roster --list</span>
+          </span>
+        </div>
+        <h2>شرکت‌کننده‌ها و منتورها</h2>
+        <div class="frame soon-box">
+          <span class="dot-pulse" aria-hidden="true"></span>
+          <span>به‌زودی</span>
         </div>
       </section>
     </main>
