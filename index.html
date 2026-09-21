@@ -280,6 +280,9 @@
         justify-content: center;
         padding: 1.25rem;
       }
+      /* The `.modal` display:flex above outranks the UA [hidden] rule, so the
+         hidden state must be reasserted here or the modal never hides. */
+      .modal[hidden] { display: none; }
       .modal-backdrop {
         position: absolute;
         inset: 0;
