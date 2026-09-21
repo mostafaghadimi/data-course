@@ -4,6 +4,21 @@
       "name": "مصطفی قدیمی",
       "linkedin": "https://www.linkedin.com/in/mostafaghadimi/",
       "avatar": "https://github.com/mostafaghadimi.png?size=200"
+    },
+    {
+      "name": "محمدکاظم فقیه",
+      "linkedin": "https://www.linkedin.com/in/kazem-faghih",
+      "avatar": "https://avatars.githubusercontent.com/u/33594521?v=4",
+      "education": [
+        "دانشجوی دکتری علوم کامپیوتر دانشگاه مریلند",
+        "فارغ‌التحصیل کارشناسی مهندسی کامپیوتر شریف",
+        "کارآموزی بیوانفورماتیک محاسباتی در مؤسسه مکس‌پلانک"
+      ],
+      "experience": [
+        "مهندس داده در شرکت بلد/هزاردستان",
+        "مهندس یادگیری ماشین در کارگزاری مفید",
+        "مهندس نرم‌افزار در شرکت یکتانت"
+      ]
     }
   ],
   "participants": []
