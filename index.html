@@ -175,22 +175,53 @@
       .enroll-head .cap { font-size: 0.75rem; color: var(--fg-subtle); }
       .enroll .frame { max-width: 40rem; }
 
-      /* Participants & mentors — coming soon */
+      /* Participants & mentors */
       .soon { padding: 0 0 6rem; }
+      .roster {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem 2rem;
+        align-items: start;
+      }
+      @media (max-width: 640px) { .roster { grid-template-columns: 1fr; } }
       .soon h2 {
-        margin: 0 0 1.25rem;
-        font-size: clamp(1.5rem, 4vw, 2rem);
+        margin: 0 0 1rem;
+        font-size: clamp(1.35rem, 3.5vw, 1.75rem);
         font-weight: 700;
       }
+      .people { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.6rem; }
+      .person {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.9rem 1.15rem;
+        background: var(--bg-elevated);
+        border: 1px solid var(--rule);
+        border-radius: 4px;
+      }
+      .p-name { font-weight: 600; }
+      .p-link {
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        color: var(--accent-ink);
+        background: var(--accent-soft);
+        border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+        border-radius: 3px;
+        padding: 0.25rem 0.55rem;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: background 0.15s ease;
+      }
+      .p-link:hover { background: color-mix(in srgb, var(--accent) 22%, var(--accent-soft)); }
       .soon-box {
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 0.6rem;
-        max-width: 40rem;
-        padding: 3rem 1.5rem;
+        padding: 2.5rem 1.5rem;
         color: var(--fg-muted);
-        font-size: 1.1rem;
+        font-size: 1.05rem;
       }
 
       .field {
@@ -351,10 +382,30 @@
             <span class="cmd">./roster --list</span>
           </span>
         </div>
-        <h2>شرکت‌کننده‌ها و منتورها</h2>
-        <div class="frame soon-box">
-          <span class="dot-pulse" aria-hidden="true"></span>
-          <span>به‌زودی</span>
+        <div class="roster">
+          <div class="roster-col">
+            <h2>منتورها</h2>
+            <ul class="people">
+              <li class="person">
+                <span class="p-name">مصطفی قدیمی</span>
+                <a
+                  class="p-link"
+                  href="https://www.linkedin.com/in/mostafaghadimi/"
+                  target="_blank"
+                  rel="noopener"
+                  dir="ltr"
+                >LinkedIn ↗</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="roster-col">
+            <h2>شرکت‌کننده‌ها</h2>
+            <div class="frame soon-box">
+              <span class="dot-pulse" aria-hidden="true"></span>
+              <span>به‌زودی</span>
+            </div>
+          </div>
         </div>
       </section>
     </main>
