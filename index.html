@@ -8,8 +8,7 @@
       name="description"
       content="دورهٔ رایگان و آنلاین مهندسی داده و هوش مصنوعی. فرم را پر کنید تا در تلگرام با شما در تماس باشیم."
     />
-    <meta name="theme-color" content="#f7f3ed" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#14110e" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f7f3ed" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -42,26 +41,6 @@
         --font-sans: "Vazirmatn", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
         --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       }
-      @media (prefers-color-scheme: dark) {
-        :root {
-          color-scheme: dark;
-          --bg: #14110e;
-          --bg-elevated: #1d1a16;
-          --bg-soft: #25211b;
-          --bg-inset: #100e0b;
-          --fg: #faf6f0;
-          --fg-muted: #b8aea3;
-          --fg-subtle: #8b8278;
-          --rule: #2d2924;
-          --rule-strong: #443d34;
-          --accent: #ff7a40;
-          --accent-soft: #5a2900;
-          --accent-ink: #ffb380;
-          --selection: #7a3500;
-          --sink: #4ade80;
-        }
-      }
-
       * { box-sizing: border-box; }
       html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
       body {
@@ -266,10 +245,6 @@
       .msg { font-size: 0.95rem; margin: 1rem 0 0; }
       .msg.ok { color: var(--sink); font-weight: 500; }
       .msg.err { color: #c0392b; }
-      @media (prefers-color-scheme: dark) {
-        #f-submit { color: #14110e; }
-        .msg.err { color: #ff8a75; }
-      }
 
       @media (prefers-reduced-motion: reduce) {
         .dot-pulse::after { animation: none; }
