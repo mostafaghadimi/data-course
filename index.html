@@ -178,12 +178,11 @@
       /* Participants & mentors */
       .soon { padding: 0 0 6rem; }
       .roster {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 1.5rem 2rem;
-        align-items: start;
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+        max-width: 40rem;
       }
-      @media (max-width: 640px) { .roster { grid-template-columns: 1fr; } }
       .soon h2 {
         margin: 0 0 1rem;
         font-size: clamp(1.35rem, 3.5vw, 1.75rem);
@@ -193,13 +192,14 @@
       .person {
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
+        justify-content: flex-start;
+        gap: 0.9rem;
         padding: 0.9rem 1.15rem;
         background: var(--bg-elevated);
         border: 1px solid var(--rule);
         border-radius: 4px;
       }
+      .person .p-id { flex: 1; }
       .roster-note {
         margin: 0 0 1.5rem;
         font-size: 0.9rem;
