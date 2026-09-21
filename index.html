@@ -200,6 +200,38 @@
         border: 1px solid var(--rule);
         border-radius: 4px;
       }
+      .roster-note {
+        margin: 0 0 1.5rem;
+        font-size: 0.9rem;
+        color: var(--fg-muted);
+      }
+      .roster-note code {
+        font-family: var(--font-mono);
+        font-size: 0.82em;
+        color: var(--accent-ink);
+        background: var(--accent-soft);
+        padding: 0.05rem 0.35rem;
+        border-radius: 3px;
+      }
+      .people-loading { list-style: none; color: var(--fg-subtle); font-size: 0.9rem; }
+      .p-id { display: flex; align-items: center; gap: 0.7rem; min-width: 0; }
+      .avatar {
+        flex: none;
+        width: 2.4rem;
+        height: 2.4rem;
+        border-radius: 50%;
+        overflow: hidden;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg-soft);
+        border: 1px solid var(--rule);
+        color: var(--fg-muted);
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+      .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
       .p-name { font-weight: 600; }
       .p-link {
         font-family: var(--font-mono);
@@ -382,29 +414,19 @@
             <span class="cmd">./roster --list</span>
           </span>
         </div>
+        <p class="roster-note">
+          می‌خوای اسمت این‌جا باشه؟ کافیه یک ورودی به
+          <code dir="ltr">data/people.json</code> اضافه کنی و یک Pull Request بزنی.
+        </p>
         <div class="roster">
           <div class="roster-col">
             <h2>منتورها</h2>
-            <ul class="people">
-              <li class="person">
-                <span class="p-name">مصطفی قدیمی</span>
-                <a
-                  class="p-link"
-                  href="https://www.linkedin.com/in/mostafaghadimi/"
-                  target="_blank"
-                  rel="noopener"
-                  dir="ltr"
-                >LinkedIn ↗</a>
-              </li>
-            </ul>
+            <ul class="people" id="mentors"><li class="people-loading">در حال بارگذاری…</li></ul>
           </div>
 
           <div class="roster-col">
             <h2>شرکت‌کننده‌ها</h2>
-            <div class="frame soon-box">
-              <span class="dot-pulse" aria-hidden="true"></span>
-              <span>به‌زودی</span>
-            </div>
+            <ul class="people" id="participants"><li class="people-loading">در حال بارگذاری…</li></ul>
           </div>
         </div>
       </section>
@@ -517,6 +539,81 @@
           console.assert(b.indexOf(ENTRY.goal + "=") === -1, "empty goal should be omitted");
           console.log("selftest ok");
         }
+      })();
+
+      // Mentors & participants are rendered from data/people.json so anyone
+      // can add themselves with a one-line Pull Request — no HTML needed.
+      (function () {
+        var COMING = "به‌زودی";
+        function initials(name) {
+          return (name || "?").trim().split(/\s+/).slice(0, 2)
+            .map(function (w) { return w.charAt(0); }).join("");
+        }
+        function avatar(p) {
+          var el = document.createElement("span");
+          el.className = "avatar";
+          if (p.avatar) {
+            var img = document.createElement("img");
+            img.src = p.avatar;
+            img.alt = p.name || "";
+            img.loading = "lazy";
+            img.onerror = function () { img.remove(); el.textContent = initials(p.name); };
+            el.appendChild(img);
+          } else {
+            el.textContent = initials(p.name);
+          }
+          return el;
+        }
+        function card(p) {
+          var li = document.createElement("li");
+          li.className = "person";
+          var id = document.createElement("span");
+          id.className = "p-id";
+          id.appendChild(avatar(p));
+          var name = document.createElement("span");
+          name.className = "p-name";
+          name.textContent = p.name || "";
+          id.appendChild(name);
+          li.appendChild(id);
+          if (p.linkedin) {
+            var a = document.createElement("a");
+            a.className = "p-link";
+            a.href = p.linkedin;
+            a.target = "_blank";
+            a.rel = "noopener";
+            a.dir = "ltr";
+            a.textContent = "LinkedIn ↗";
+            li.appendChild(a);
+          }
+          return li;
+        }
+        function fill(el, list) {
+          if (!el) return;
+          el.innerHTML = "";
+          if (!list || !list.length) {
+            var box = document.createElement("li");
+            box.className = "frame soon-box";
+            var dot = document.createElement("span");
+            dot.className = "dot-pulse";
+            var t = document.createElement("span");
+            t.textContent = COMING;
+            box.appendChild(dot);
+            box.appendChild(t);
+            el.appendChild(box);
+            return;
+          }
+          list.forEach(function (p) { el.appendChild(card(p)); });
+        }
+        fetch("data/people.json", { cache: "no-cache" })
+          .then(function (r) { return r.json(); })
+          .then(function (d) {
+            fill(document.getElementById("mentors"), d.mentors);
+            fill(document.getElementById("participants"), d.participants);
+          })
+          .catch(function () {
+            fill(document.getElementById("mentors"), []);
+            fill(document.getElementById("participants"), []);
+          });
       })();
 
       // Ambient event-stream background: slow drifting dots. ~0 CPU, respects
