@@ -3,7 +3,17 @@
     {
       "name": "مصطفی قدیمی",
       "linkedin": "https://www.linkedin.com/in/mostafaghadimi/",
-      "avatar": "https://github.com/mostafaghadimi.png?size=200"
+      "avatar": "https://github.com/mostafaghadimi.png?size=200",
+      "education": [
+        "فارغ‌التحصیل کارشناسی مهندسی کامپیوتر دانشگاه شریف",
+        "فارغ‌التحصیل ارشد مهندسی کامپیوتر (الگوریتم‌ها و محاسبات) دانشگاه تهران"
+      ],
+      "experience": [
+        "مهندس داده در دیجی‌کالا",
+        "مهندس داده در کارگزاری مفید",
+        "مهندس داده و تک‌لید در اسنپ‌پی",
+        "مهندس هوش‌مصنوعی در شرکت Vendoroo"
+      ]
     },
     {
       "name": "محمدکاظم فقیه",
