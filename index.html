@@ -185,6 +185,92 @@
       }
       .lead b { color: var(--fg); font-weight: 600; }
 
+      /* Enroll section */
+      .enroll { padding: 0 0 6rem; }
+      .enroll-head {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.25rem;
+      }
+      .enroll-head .cap { font-size: 0.75rem; color: var(--fg-subtle); }
+      .enroll .frame { max-width: 40rem; }
+
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        margin: 0 0 1.25rem;
+        border: 0;
+        padding: 0;
+      }
+      .field label,
+      .field legend { font-size: 0.9rem; font-weight: 500; color: var(--fg); }
+      .req { color: var(--accent); }
+      .opt-tag { color: var(--fg-subtle); font-weight: 400; font-size: 0.8rem; }
+      #enroll-form input[type="text"],
+      #enroll-form input[type="tel"] {
+        width: 100%;
+        padding: 0.7rem 0.85rem;
+        font: inherit;
+        color: var(--fg);
+        background: var(--bg);
+        border: 1px solid var(--rule-strong);
+        border-radius: 4px;
+        transition: border-color 0.15s ease, box-shadow 0.15s ease;
+      }
+      #enroll-form input[type="text"]:focus,
+      #enroll-form input[type="tel"]:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
+      }
+      .opts { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+      .opt {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        padding: 0.5rem 0.85rem;
+        font-size: 0.9rem;
+        color: var(--fg-muted);
+        background: var(--bg-soft);
+        border: 1px solid var(--rule);
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .opt:has(input:checked) {
+        color: var(--accent-ink);
+        background: var(--accent-soft);
+        border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+      }
+      .opt input { accent-color: var(--accent); width: 1rem; height: 1rem; }
+      .other-text { flex: 1 1 12rem; min-width: 10rem; }
+      .other-text:disabled { opacity: 0.45; cursor: not-allowed; }
+      .actions { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-top: 1.75rem; }
+      #f-submit {
+        font: inherit;
+        font-weight: 600;
+        color: #fff;
+        background: var(--accent);
+        border: 1px solid var(--accent);
+        border-radius: 4px;
+        padding: 0.7rem 1.6rem;
+        cursor: pointer;
+        transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+      }
+      #f-submit:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px color-mix(in srgb, var(--accent) 40%, transparent);
+      }
+      #f-submit:disabled { opacity: 0.6; cursor: default; }
+      .msg { font-size: 0.95rem; margin: 1rem 0 0; }
+      .msg.ok { color: var(--sink); font-weight: 500; }
+      .msg.err { color: #c0392b; }
+      @media (prefers-color-scheme: dark) {
+        #f-submit { color: #14110e; }
+        .msg.err { color: #ff8a75; }
+      }
+
       @media (prefers-reduced-motion: reduce) {
         .dot-pulse::after { animation: none; }
         html { scroll-behavior: auto; }
@@ -210,9 +296,169 @@
           <b>تلگرام</b> با شما در تماس باشیم.
         </p>
       </section>
+
+      <section class="enroll">
+        <div class="enroll-head">
+          <span class="log-line" dir="ltr">
+            <span class="stage">[ENROLL]</span>
+            <span class="prompt">$</span>
+            <span class="cmd">./enroll --write google-form</span>
+          </span>
+          <span class="cap">ظرفیت محدود</span>
+        </div>
+
+        <div class="frame">
+          <form id="enroll-form" novalidate>
+            <div class="field">
+              <label for="f-name">نام و نام‌خانوادگی <span class="req">*</span></label>
+              <input id="f-name" type="text" required autocomplete="name" />
+            </div>
+
+            <div class="field">
+              <label for="f-phone">شماره تماس <span class="req">*</span></label>
+              <input id="f-phone" type="tel" inputmode="tel" required autocomplete="tel" dir="ltr" />
+            </div>
+
+            <div class="field">
+              <label for="f-telegram">آی‌دی تلگرام <span class="req">*</span></label>
+              <input id="f-telegram" type="text" required placeholder="@username" dir="ltr" />
+            </div>
+
+            <fieldset class="field">
+              <legend>وضعیت کار / تحصیل <span class="req">*</span></legend>
+              <div class="opts">
+                <label class="opt"><input type="checkbox" name="status" value="دانشجو" /><span>دانشجو</span></label>
+                <label class="opt"><input type="checkbox" name="status" value="کارمند" /><span>کارمند</span></label>
+                <label class="opt"><input type="checkbox" name="status" value="کار و تحصیل هم‌زمان" /><span>کار و تحصیل هم‌زمان</span></label>
+                <label class="opt"><input type="checkbox" name="status" value="__other__" id="f-status-other" /><span>غیره</span></label>
+                <input id="f-status-other-text" type="text" class="other-text" placeholder="توضیح دهید…" disabled />
+              </div>
+            </fieldset>
+
+            <div class="field">
+              <label for="f-goal">هدف از شرکت در دوره <span class="opt-tag">(اختیاری، در حد یک خط)</span></label>
+              <input id="f-goal" type="text" />
+            </div>
+
+            <div class="actions">
+              <button type="submit" id="f-submit">ثبت‌نام</button>
+            </div>
+          </form>
+          <!-- Outside the form so it stays visible after the form is hidden -->
+          <p id="f-msg" class="msg" role="status" aria-live="polite" hidden></p>
+        </div>
+      </section>
     </main>
 
     <script>
+      // Native enrollment form → posts straight to the Google Form response
+      // endpoint (no iframe). Field IDs were read from the live form; if you
+      // edit the form's questions in Google, update these to match.
+      (function () {
+        var FORM_ACTION =
+          "https://docs.google.com/forms/d/e/1FAIpQLSebdPq51OF-6Jw9yp2wgp_v1jgHBxOv-mcJHW-J4f-tCT1BEQ/formResponse";
+        var ENTRY = {
+          name: "entry.1428347690",
+          phone: "entry.131263601",
+          status: "entry.1278425926",
+          telegram: "entry.682448012",
+          goal: "entry.1101898098",
+        };
+
+        var form = document.getElementById("enroll-form");
+        if (!form) return;
+        var msg = document.getElementById("f-msg");
+        var btn = document.getElementById("f-submit");
+        var otherBox = document.getElementById("f-status-other");
+        var otherText = document.getElementById("f-status-other-text");
+        var $ = function (id) { return document.getElementById(id); };
+
+        otherBox.addEventListener("change", function () {
+          otherText.disabled = !otherBox.checked;
+          if (otherBox.checked) otherText.focus();
+        });
+
+        // Pure: map collected values → the querystring Google's endpoint expects.
+        function buildBody(v) {
+          var p = new URLSearchParams();
+          p.append(ENTRY.name, v.name);
+          p.append(ENTRY.phone, v.phone);
+          p.append(ENTRY.telegram, v.telegram);
+          if (v.goal) p.append(ENTRY.goal, v.goal);
+          for (var i = 0; i < v.status.length; i++) p.append(ENTRY.status, v.status[i]);
+          if (v.otherText) {
+            p.append(ENTRY.status, "__other_option__");
+            p.append(ENTRY.status + ".other_option_response", v.otherText);
+          }
+          return p.toString();
+        }
+
+        function collect() {
+          var checked = Array.prototype.slice.call(
+            form.querySelectorAll('input[name="status"]:checked')
+          );
+          var status = checked.map(function (c) { return c.value; })
+            .filter(function (x) { return x !== "__other__"; });
+          return {
+            name: $("f-name").value.trim(),
+            phone: $("f-phone").value.trim(),
+            telegram: $("f-telegram").value.trim(),
+            goal: $("f-goal").value.trim(),
+            status: status,
+            otherText: otherBox.checked ? otherText.value.trim() : "",
+          };
+        }
+
+        function show(text, ok) {
+          msg.hidden = false;
+          msg.textContent = text;
+          msg.classList.toggle("ok", !!ok);
+          msg.classList.toggle("err", !ok);
+        }
+
+        form.addEventListener("submit", async function (e) {
+          e.preventDefault();
+          var v = collect();
+          if (!v.name || !v.phone || !v.telegram) {
+            show("لطفاً نام، شماره تماس و آی‌دی تلگرام را کامل کنید.", false);
+            return;
+          }
+          if (v.status.length === 0 && !v.otherText) {
+            show("لطفاً وضعیت کار/تحصیل را انتخاب کنید.", false);
+            return;
+          }
+          btn.disabled = true;
+          var prev = btn.textContent;
+          btn.textContent = "در حال ارسال…";
+          try {
+            // no-cors: Google returns an opaque response but records the entry.
+            await fetch(FORM_ACTION, {
+              method: "POST",
+              mode: "no-cors",
+              headers: { "Content-Type": "application/x-www-form-urlencoded" },
+              body: buildBody(v),
+            });
+            form.hidden = true;
+            show("ثبت‌نام شما انجام شد ✓ به‌زودی در تلگرام با شما در تماس خواهیم بود.", true);
+          } catch (_) {
+            btn.disabled = false;
+            btn.textContent = prev;
+            show("ارسال ناموفق بود. اتصال اینترنت را بررسی کنید و دوباره تلاش کنید.", false);
+          }
+        });
+
+        // Tiny self-check for the body builder — visit ?selftest to run it.
+        if (location.search.indexOf("selftest") !== -1) {
+          var b = buildBody({ name: "a", phone: "1", telegram: "@t", goal: "", status: ["دانشجو"], otherText: "x" });
+          var esc = ENTRY.status.replace(/\./g, "\\.");
+          console.assert(b.indexOf(ENTRY.name + "=a") !== -1, "name missing");
+          console.assert((b.match(new RegExp(esc + "=", "g")) || []).length === 2, "status+other should send two values");
+          console.assert(b.indexOf(".other_option_response=x") !== -1, "other text missing");
+          console.assert(b.indexOf(ENTRY.goal + "=") === -1, "empty goal should be omitted");
+          console.log("selftest ok");
+        }
+      })();
+
       // Ambient event-stream background: slow drifting dots. ~0 CPU, respects
       // prefers-reduced-motion, re-reads the accent so dark mode swaps for free.
       (function () {
