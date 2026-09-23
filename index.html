@@ -42,7 +42,95 @@
         --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       }
       * { box-sizing: border-box; }
-      html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+      html {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        scroll-behavior: smooth;
+        scroll-padding-top: 4.5rem;
+      }
+
+      /* Responsive top navbar */
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: color-mix(in srgb, var(--bg) 85%, transparent);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--rule);
+      }
+      .nav-inner {
+        max-width: 62rem;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        height: 3.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      .nav-brand {
+        font-weight: 700;
+        font-size: 0.95rem;
+        color: var(--fg);
+        text-decoration: none;
+        white-space: nowrap;
+      }
+      .nav-brand:hover { color: var(--accent); }
+      .nav-menu {
+        display: flex;
+        align-items: center;
+        gap: 1.35rem;
+        margin-inline-start: auto;
+      }
+      .nav-menu a {
+        font-size: 0.9rem;
+        color: var(--fg-muted);
+        text-decoration: none;
+        transition: color 0.15s ease;
+      }
+      .nav-menu a:hover { color: var(--accent); }
+      .nav-tg {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        color: #fff;
+        background: var(--accent);
+        border: 1px solid var(--accent);
+        border-radius: 4px;
+        padding: 0.35rem 0.75rem;
+      }
+      .nav-tg:hover { color: #fff; background: var(--accent-ink); border-color: var(--accent-ink); }
+      .nav-toggle {
+        display: none;
+        margin-inline-start: auto;
+        width: 2.2rem;
+        height: 2.2rem;
+        align-items: center;
+        justify-content: center;
+        color: var(--fg-muted);
+        background: transparent;
+        border: 1px solid var(--rule-strong);
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .nav-toggle:hover { color: var(--accent); border-color: var(--accent); }
+      @media (max-width: 640px) {
+        .nav-toggle { display: inline-flex; }
+        .nav-menu {
+          display: none;
+          position: absolute;
+          top: 100%;
+          inset-inline: 0;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0;
+          padding: 0.25rem 1.5rem 0.75rem;
+          background: var(--bg-elevated);
+          border-bottom: 1px solid var(--rule);
+        }
+        .nav.open .nav-menu { display: flex; }
+        .nav-menu a { padding: 0.7rem 0; border-top: 1px solid var(--rule); }
+        .nav-menu .nav-tg { justify-content: center; margin-top: 0.7rem; padding: 0.6rem; border-top: 0; }
+      }
       body {
         margin: 0;
         min-height: 100dvh;
@@ -163,6 +251,40 @@
         line-height: 1.9;
       }
       .lead b { color: var(--fg); font-weight: 600; }
+      .hero-note {
+        margin: 1.5rem 0 0;
+        max-width: 52ch;
+        padding: 0.85rem 1.1rem;
+        background: var(--accent-soft);
+        border-inline-start: 3px solid var(--accent);
+        border-radius: 4px;
+        color: var(--accent-ink);
+        font-size: 0.92rem;
+        line-height: 1.8;
+      }
+      .hero-note b { font-weight: 700; }
+      .hero-cta { margin-top: 1.5rem; display: flex; align-items: center; flex-wrap: wrap; gap: 0.75rem 1rem; }
+      .tg-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        color: #fff;
+        background: var(--accent);
+        border: 1px solid var(--accent);
+        border-radius: 6px;
+        padding: 0.8rem 1.4rem;
+        font-size: 1rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      }
+      .tg-btn:hover {
+        transform: translateY(-2px);
+        background: var(--accent-ink);
+        border-color: var(--accent-ink);
+        box-shadow: 0 8px 24px color-mix(in srgb, var(--accent) 40%, transparent);
+      }
+      .tg-handle { font-family: var(--font-mono); font-size: 0.82rem; color: var(--fg-subtle); }
 
       /* Enroll section */
       .enroll { padding: 0 0 6rem; }
@@ -174,6 +296,59 @@
       }
       .enroll-head .cap { font-size: 0.75rem; color: var(--fg-subtle); }
       .enroll .frame { max-width: 40rem; }
+
+      /* Course sections: sessions & resources */
+      .course { padding: 0 0 3.5rem; }
+      .course h2 {
+        margin: 0 0 1.25rem;
+        font-size: clamp(1.35rem, 3.5vw, 1.75rem);
+        font-weight: 700;
+      }
+      .track-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        max-width: 40rem;
+      }
+      .session,
+      .resource {
+        display: flex;
+        align-items: center;
+        gap: 0.9rem;
+        padding: 0.9rem 1.15rem;
+        background: var(--bg-elevated);
+        border: 1px solid var(--rule);
+        border-radius: 4px;
+      }
+      .s-badge,
+      .r-badge {
+        flex: none;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        color: var(--accent-ink);
+        background: var(--accent-soft);
+        border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+        border-radius: 3px;
+        padding: 0.2rem 0.5rem;
+        white-space: nowrap;
+      }
+      .s-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 0.2rem; }
+      .s-title,
+      .r-title { font-weight: 600; }
+      .s-meta { font-size: 0.82rem; color: var(--fg-subtle); }
+      .r-title { flex: 1; min-width: 0; color: var(--fg); text-decoration: none; }
+      a.r-title:hover { color: var(--accent); }
+      .s-link {
+        flex: none;
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        color: var(--accent-ink);
+        text-decoration: none;
+      }
+      .s-link:hover { color: var(--accent); }
 
       /* Participants & mentors */
       .soon { padding: 0 0 6rem; }
@@ -219,6 +394,9 @@
       .site-foot {
         padding: 2rem 0 3rem;
         border-top: 1px solid var(--rule);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem 1.5rem;
       }
       .site-foot a {
         display: inline-flex;
@@ -421,6 +599,37 @@
   <body>
     <canvas id="stream-bg" aria-hidden="true"></canvas>
 
+    <header class="nav" id="top">
+      <div class="nav-inner">
+        <a class="nav-brand" href="#top">دورهٔ داده و هوش مصنوعی</a>
+        <button
+          type="button"
+          class="nav-toggle"
+          aria-label="منو"
+          aria-expanded="false"
+          aria-controls="nav-menu"
+        >
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        </button>
+        <nav class="nav-menu" id="nav-menu" aria-label="بخش‌ها">
+          <a href="#enroll">ثبت‌نام</a>
+          <a href="#sessions">جلسه‌ها</a>
+          <a href="#resources">منابع</a>
+          <a href="#team">منتورها</a>
+          <a class="nav-tg" href="https://t.me/data_ai_engineering" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+              <path d="M21.94 4.6 18.9 19.2c-.23 1.02-.84 1.27-1.7.79l-4.7-3.47-2.27 2.18c-.25.25-.46.46-.94.46l.33-4.77 8.67-7.84c.38-.34-.08-.53-.59-.19L6.98 13.2l-4.62-1.45c-1-.31-1.02-1 .21-1.48L20.63 3.3c.84-.31 1.57.19 1.31 1.3z" />
+            </svg>
+            کانال تلگرام
+          </a>
+        </nav>
+      </div>
+    </header>
+
     <main class="wrap">
       <section class="hero">
         <div class="status">
@@ -437,6 +646,21 @@
           راجع‌به شما داشته باشیم، لطفا فرم زیر رو پر کنید تا باهاتون تو
           <b>تلگرام</b> در تماس باشیم.
         </p>
+
+        <p class="hero-note">
+          <b>نکته:</b> قبل از عضویت در کانال تلگرام دوره لطفا مطمئن باشید که فرم
+          مربوط به ثبت اطلاعات‌تون رو پر کردید.
+        </p>
+
+        <div class="hero-cta">
+          <a class="tg-btn" href="https://t.me/data_ai_engineering" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+              <path d="M21.94 4.6 18.9 19.2c-.23 1.02-.84 1.27-1.7.79l-4.7-3.47-2.27 2.18c-.25.25-.46.46-.94.46l.33-4.77 8.67-7.84c.38-.34-.08-.53-.59-.19L6.98 13.2l-4.62-1.45c-1-.31-1.02-1 .21-1.48L20.63 3.3c.84-.31 1.57.19 1.31 1.3z" />
+            </svg>
+            عضویت در کانال تلگرام دوره
+          </a>
+          <span class="tg-handle" dir="ltr">t.me/data_ai_engineering</span>
+        </div>
       </section>
 
       <section class="enroll">
@@ -491,7 +715,31 @@
         </div>
       </section>
 
-      <section class="soon">
+      <section class="course" id="sessions">
+        <div class="enroll-head">
+          <span class="log-line" dir="ltr">
+            <span class="stage">[SESSIONS]</span>
+            <span class="prompt">$</span>
+            <span class="cmd">./schedule</span>
+          </span>
+        </div>
+        <h2>جلسه‌ها و همایش‌ها</h2>
+        <ul class="track-list" id="sessions-list"><li class="people-loading">در حال بارگذاری…</li></ul>
+      </section>
+
+      <section class="course" id="resources">
+        <div class="enroll-head">
+          <span class="log-line" dir="ltr">
+            <span class="stage">[RESOURCES]</span>
+            <span class="prompt">$</span>
+            <span class="cmd">./resources</span>
+          </span>
+        </div>
+        <h2>منابع</h2>
+        <ul class="track-list" id="resources-list"><li class="people-loading">در حال بارگذاری…</li></ul>
+      </section>
+
+      <section class="soon" id="team">
         <div class="enroll-head">
           <span class="log-line" dir="ltr">
             <span class="stage">[TEAM]</span>
@@ -535,6 +783,17 @@
           </svg>
           github.com/mostafaghadimi/data-course
         </a>
+        <a
+          href="https://t.me/data_ai_engineering"
+          target="_blank"
+          rel="noopener"
+          dir="ltr"
+        >
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+            <path d="M21.94 4.6 18.9 19.2c-.23 1.02-.84 1.27-1.7.79l-4.7-3.47-2.27 2.18c-.25.25-.46.46-.94.46l.33-4.77 8.67-7.84c.38-.34-.08-.53-.59-.19L6.98 13.2l-4.62-1.45c-1-.31-1.02-1 .21-1.48L20.63 3.3c.84-.31 1.57.19 1.31 1.3z" />
+          </svg>
+          t.me/data_ai_engineering
+        </a>
       </footer>
     </main>
 
@@ -555,6 +814,23 @@
     </div>
 
     <script>
+      // Responsive navbar: toggle the mobile menu, close it after a jump.
+      (function () {
+        var nav = document.querySelector(".nav");
+        var toggle = nav && nav.querySelector(".nav-toggle");
+        if (!nav || !toggle) return;
+        toggle.addEventListener("click", function () {
+          var open = nav.classList.toggle("open");
+          toggle.setAttribute("aria-expanded", String(open));
+        });
+        nav.querySelectorAll(".nav-menu a").forEach(function (a) {
+          a.addEventListener("click", function () {
+            nav.classList.remove("open");
+            toggle.setAttribute("aria-expanded", "false");
+          });
+        });
+      })();
+
       // Native enrollment form → posts straight to the Google Form response
       // endpoint (no iframe). Field IDs were read from the live form; if you
       // edit the form's questions in Google, update these to match.
@@ -788,6 +1064,81 @@
           .catch(function () {
             fill(document.getElementById("mentors"), []);
             fill(document.getElementById("participants"), []);
+          });
+
+        // Sessions & resources are rendered from data/course.json.
+        function sessionCard(s) {
+          var li = document.createElement("li");
+          li.className = "session";
+          if (s.type) {
+            var b = document.createElement("span");
+            b.className = "s-badge";
+            b.textContent = s.type;
+            li.appendChild(b);
+          }
+          var body = document.createElement("div");
+          body.className = "s-body";
+          var t = document.createElement("span");
+          t.className = "s-title";
+          t.textContent = s.title || "";
+          body.appendChild(t);
+          var meta = [];
+          if (s.date) meta.push(s.date);
+          if (s.speaker) meta.push(s.speaker);
+          if (meta.length) {
+            var m = document.createElement("span");
+            m.className = "s-meta";
+            m.textContent = meta.join(" · ");
+            body.appendChild(m);
+          }
+          li.appendChild(body);
+          if (s.link) {
+            var a = document.createElement("a");
+            a.className = "s-link";
+            a.href = s.link;
+            a.target = "_blank";
+            a.rel = "noopener";
+            a.dir = "ltr";
+            a.textContent = "مشاهده ↗";
+            li.appendChild(a);
+          }
+          return li;
+        }
+        function resourceCard(r) {
+          var li = document.createElement("li");
+          li.className = "resource";
+          if (r.type) {
+            var b = document.createElement("span");
+            b.className = "r-badge";
+            b.textContent = r.type;
+            li.appendChild(b);
+          }
+          var t = r.link ? document.createElement("a") : document.createElement("span");
+          t.className = "r-title";
+          if (r.link) {
+            t.href = r.link;
+            t.target = "_blank";
+            t.rel = "noopener";
+          }
+          t.textContent = r.title || "";
+          li.appendChild(t);
+          return li;
+        }
+        function fillTrack(el, items, make) {
+          if (!el) return;
+          if (!items || !items.length) { fill(el, []); return; }
+          el.innerHTML = "";
+          items.forEach(function (x) { el.appendChild(make(x)); });
+        }
+        fetch("data/course.json", { cache: "no-cache" })
+          .then(function (r) { return r.json(); })
+          .then(function (d) {
+            fillTrack(document.getElementById("sessions-list"), d.sessions, sessionCard);
+            fillTrack(document.getElementById("resources-list"), d.resources, resourceCard);
+          })
+          .catch(function () {
+            fill(document.getElementById("sessions-list"), []);
+            fill(document.getElementById("resources-list"), []);
           });
       })();
 
