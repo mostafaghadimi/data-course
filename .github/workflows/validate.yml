@@ -1,0 +1,64 @@
+name: Validate people.json
+
+on:
+  pull_request:
+    paths: [data/people.json]
+  push:
+    branches: [main]
+    paths: [data/people.json]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate data/people.json
+        run: |
+          python3 - <<'PY'
+          import json, sys
+
+          path = "data/people.json"
+          try:
+              with open(path, encoding="utf-8") as f:
+                  data = json.load(f)
+          except Exception as e:
+              print(f"::error file={path}::Invalid JSON: {e}")
+              sys.exit(1)
+
+          errors = []
+          if not isinstance(data, dict):
+              errors.append("top level must be an object")
+              data = {}
+
+          for group in ("mentors", "participants"):
+              if group not in data:
+                  errors.append(f"missing '{group}' key")
+                  continue
+              if not isinstance(data[group], list):
+                  errors.append(f"'{group}' must be a list")
+                  continue
+              for i, person in enumerate(data[group]):
+                  where = f"{group}[{i}]"
+                  if not isinstance(person, dict):
+                      errors.append(f"{where} must be an object")
+                      continue
+                  name = person.get("name")
+                  if not isinstance(name, str) or not name.strip():
+                      errors.append(f"{where}.name is required and must be a non-empty string")
+                  for key in ("linkedin", "avatar"):
+                      if key in person and not isinstance(person[key], str):
+                          errors.append(f"{where}.{key} must be a string")
+                  for key in ("education", "experience"):
+                      if key in person:
+                          v = person[key]
+                          if not isinstance(v, list) or not all(isinstance(x, str) for x in v):
+                              errors.append(f"{where}.{key} must be a list of strings")
+
+          if errors:
+              for e in errors:
+                  print(f"::error file={path}::{e}")
+              sys.exit(1)
+
+          print("people.json is valid")
+          PY
