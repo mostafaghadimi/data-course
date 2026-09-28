@@ -102,5 +102,19 @@
       ]
     }
   ],
-  "participants": []
+  "participants": [
+    {
+      "name": "سحر منصورفر",
+      "linkedin": "https://www.linkedin.com/in/sahar-m-625a37228",
+      "avatar": "https://github.com/saharmansourifar.png",
+      "education": [
+        "کارشناسی ارشد داده‌کاوی، دانشگاه صنعتی امیرکبیر",
+        "کارشناسی علوم کامپیوتر، دانشگاه الزهرا"
+      ],
+      "experience": [
+        "Data Engineer در مهیمن",
+        "AI Course Developer در جونیورا"
+      ]
+    }
+  ]
 }
