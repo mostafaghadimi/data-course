@@ -939,7 +939,8 @@
         }
       })();
 
-      // Mentors & participants are rendered from data/people.json so anyone
+      // Mentors & participants are rendered from data/mentors.json and
+      // data/participants.json so anyone
       // can add themselves with a one-line Pull Request — no HTML needed.
       (function () {
         var COMING = "به‌زودی";
@@ -1064,16 +1065,13 @@
           });
         }
 
-        fetch("data/people.json", { cache: "no-cache" })
-          .then(function (r) { return r.json(); })
-          .then(function (d) {
-            fill(document.getElementById("mentors"), d.mentors);
-            fill(document.getElementById("participants"), d.participants);
-          })
-          .catch(function () {
-            fill(document.getElementById("mentors"), []);
-            fill(document.getElementById("participants"), []);
-          });
+        ["mentors", "participants"].forEach(function (k) {
+          var el = document.getElementById(k);
+          fetch("data/" + k + ".json", { cache: "no-cache" })
+            .then(function (r) { return r.json(); })
+            .then(function (list) { fill(el, list); })
+            .catch(function () { fill(el, []); });
+        });
 
         // Sessions & resources are rendered from data/course.json.
         function sessionCard(s) {

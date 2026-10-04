@@ -1,11 +1,11 @@
-name: Validate people.json
+name: Validate people data
 
 on:
   pull_request:
-    paths: [data/people.json]
+    paths: [data/mentors.json, data/participants.json]
   push:
     branches: [main]
-    paths: [data/people.json]
+    paths: [data/mentors.json, data/participants.json]
   workflow_dispatch:
 
 jobs:
@@ -13,40 +13,35 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Validate data/people.json
+      - name: Validate data/mentors.json and data/participants.json
         run: |
           python3 - <<'PY'
           import json, sys
 
-          path = "data/people.json"
-          try:
-              with open(path, encoding="utf-8") as f:
-                  data = json.load(f)
-          except Exception as e:
-              print(f"::error file={path}::Invalid JSON: {e}")
-              sys.exit(1)
-
-          errors = []
-          if not isinstance(data, dict):
-              errors.append("top level must be an object")
-              data = {}
-
+          failed = False
           for group in ("mentors", "participants"):
-              if group not in data:
-                  errors.append(f"missing '{group}' key")
+              path = f"data/{group}.json"
+              try:
+                  with open(path, encoding="utf-8") as f:
+                      data = json.load(f)
+              except Exception as e:
+                  print(f"::error file={path}::Invalid JSON: {e}")
+                  failed = True
                   continue
-              if not isinstance(data[group], list):
-                  errors.append(f"'{group}' must be a list")
-                  continue
-              for i, person in enumerate(data[group]):
-                  where = f"{group}[{i}]"
+
+              errors = []
+              if not isinstance(data, list):
+                  errors.append("top level must be a list")
+                  data = []
+              for i, person in enumerate(data):
+                  where = f"[{i}]"
                   if not isinstance(person, dict):
                       errors.append(f"{where} must be an object")
                       continue
                   name = person.get("name")
                   if not isinstance(name, str) or not name.strip():
                       errors.append(f"{where}.name is required and must be a non-empty string")
-                  for key in ("linkedin", "avatar"):
+                  for key in ("linkedin", "avatar", "tag"):
                       if key in person and not isinstance(person[key], str):
                           errors.append(f"{where}.{key} must be a string")
                   for key in ("education", "experience"):
@@ -55,10 +50,11 @@ jobs:
                           if not isinstance(v, list) or not all(isinstance(x, str) for x in v):
                               errors.append(f"{where}.{key} must be a list of strings")
 
-          if errors:
               for e in errors:
                   print(f"::error file={path}::{e}")
-              sys.exit(1)
+              failed = failed or bool(errors)
 
-          print("people.json is valid")
+          if failed:
+              sys.exit(1)
+          print("mentors.json and participants.json are valid")
           PY
