@@ -664,6 +664,7 @@
         <nav class="nav-menu" id="nav-menu" aria-label="بخش‌ها">
           <a href="#enroll">ثبت‌نام</a>
           <a href="#sessions">جلسه‌ها</a>
+          <a href="#projects">پروژه‌ها</a>
           <a href="#resources">منابع</a>
           <a href="#team">منتورها</a>
           <a class="nav-tg" href="https://t.me/data_ai_engineering" target="_blank" rel="noopener">
@@ -725,6 +726,18 @@
         </div>
         <h2>جلسه‌ها و همایش‌ها</h2>
         <ul class="track-list" id="sessions-list"><li class="people-loading">در حال بارگذاری…</li></ul>
+      </section>
+
+      <section class="course" id="projects">
+        <div class="enroll-head">
+          <span class="log-line" dir="ltr">
+            <span class="stage">[PROJECTS]</span>
+            <span class="prompt">$</span>
+            <span class="cmd">./assignments</span>
+          </span>
+        </div>
+        <h2>پروژه و تمرین‌ها</h2>
+        <ul class="track-list" id="projects-list"><li class="people-loading">در حال بارگذاری…</li></ul>
       </section>
 
       <section class="course" id="resources">
@@ -1073,7 +1086,8 @@
             .catch(function () { fill(el, []); });
         });
 
-        // Sessions & resources are rendered from data/course.json.
+        // Sessions, projects & resources are rendered from data/course.json.
+        // Projects reuse the session card: type badge, title, date (deadline), link.
         function sessionCard(s) {
           var li = document.createElement("li");
           li.className = "session";
@@ -1141,10 +1155,12 @@
           .then(function (r) { return r.json(); })
           .then(function (d) {
             fillTrack(document.getElementById("sessions-list"), d.sessions, sessionCard);
+            fillTrack(document.getElementById("projects-list"), d.projects, sessionCard);
             fillTrack(document.getElementById("resources-list"), d.resources, resourceCard);
           })
           .catch(function () {
             fill(document.getElementById("sessions-list"), []);
+            fill(document.getElementById("projects-list"), []);
             fill(document.getElementById("resources-list"), []);
           });
       })();
