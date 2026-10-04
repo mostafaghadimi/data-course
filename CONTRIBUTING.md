@@ -2,9 +2,9 @@
 
 # اضافه‌کردن اسم خودت
 
-اسم شرکت‌کننده‌ها و منتورها از `data/people.json` خونده می‌شه. برای اضافه‌شدن:
+اسم منتورها از `data/mentors.json` و اسم شرکت‌کننده‌ها از `data/participants.json` خونده می‌شه. برای اضافه‌شدن:
 
-**۱.** فایل `data/people.json` رو ویرایش کن و یک آبجکت به `participants` (یا `mentors`) اضافه کن:
+**۱.** فایل `data/participants.json` (یا برای منتورها `data/mentors.json`) رو ویرایش کن و یک آبجکت به آخر لیست اضافه کن:
 
 ```json
 {
