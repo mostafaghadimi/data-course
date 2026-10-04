@@ -2,10 +2,10 @@ name: Validate people data
 
 on:
   pull_request:
-    paths: [data/mentors.json, data/participants.json]
+    paths: [data/mentors.json, data/participants.json, data/people.json]
   push:
     branches: [main]
-    paths: [data/mentors.json, data/participants.json]
+    paths: [data/mentors.json, data/participants.json, data/people.json]
   workflow_dispatch:
 
 jobs:
@@ -16,9 +16,13 @@ jobs:
       - name: Validate data/mentors.json and data/participants.json
         run: |
           python3 - <<'PY'
-          import json, sys
+          import json, os, sys
 
           failed = False
+          if os.path.exists("data/people.json"):
+              print("::error file=data/people.json::people.json was split. Move your entry to "
+                    "data/participants.json (or data/mentors.json) and delete data/people.json. See CONTRIBUTING.md.")
+              failed = True
           for group in ("mentors", "participants"):
               path = f"data/{group}.json"
               try:
