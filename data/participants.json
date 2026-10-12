@@ -1,11 +1,17 @@
-[{
-  "name": "طاها محمدی",
-  "linkedin": "",
-  "avatar": "https://avatars.githubusercontent.com/u/244535162?v=4",
-  "education": [
-    "دانشجوی کارشناسی مهندسی کامپیوتر,آزاد"
-  ],
-  "experience": [
-    ""
-  ]
-}]
+[
+  {
+    "name": "محمد داوری",
+    "linkedin": "https://www.linkedin.com/in/mohammad-davari-a8897735a/",
+    "avatar": "https://avatars.githubusercontent.com/u/190109374?s=400&u=b97e7f4d4137c199b7bfbad0695997e18bac6b44&v=4",
+    "education": [
+      "کارشناسی مهندسی کامپیوتر، دانشگاه شاهد"
+    ]
+  },
+  {
+    "name": "طاها محمدی",
+    "avatar": "https://avatars.githubusercontent.com/u/244535162?v=4",
+    "education": [
+      "دانشجوی کارشناسی مهندسی کامپیوتر,آزاد"
+    ]
+  }
+]
