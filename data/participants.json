@@ -1,1 +1,15 @@
-[]
+[
+  {
+    "name": "فاروق عقبا",
+    "linkedin": "https://www.linkedin.com/in/farough-oghba",
+    "avatar": "https://github.com/FArooghOghba.png",
+    "education": [
+      "کارشناسی مهندسی مکانیک، دانشگاه آزاد اهواز"
+    ],
+    "experience": [
+      "توسعه‌دهنده بک‌اند (FastAPI) در Heptapeak",
+      "توسعه‌دهنده بک‌اند (Django/Python) در WelloWork AB",
+      "توسعه‌دهنده بک‌اند در پروژه Fada SuperApp"
+    ]
+  }
+]
