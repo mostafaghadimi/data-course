@@ -1,1 +1,14 @@
-[]
+[
+  {
+  "name": "علیرضا سلیمانی اصل",
+  "linkedin": "https://www.linkedin.com/in/alireza-soleimani-asl1993/",
+  "avatar": "https://media.licdn.com/dms/image/v2/D4E03AQFg-8cCGQpqXw/profile-displayphoto-scale_400_400/B4EZ_CTnCoIsAg-/0/1785671351499?e=1793232000&v=beta&t=5EmV1TJ9DxGF1B7lmB7Ljz-revrDHXdQzhO-gGUn2gM",
+  "education": [
+    "کارشناسی مهندسی نرم افزار، دانشگاه دولتی ملایر"
+  ],
+  "experience": [
+    "برنامه نویس دات نت در دانشگاه علوم پزشکی همدان",
+    "برنامه نویس دات نت در پروژه استارتاپی asp.net core"
+  ]
+}
+]
