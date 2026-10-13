@@ -102,5 +102,12 @@
   {
     "name": "Amin Alyari",
     "linkedin": "https://www.linkedin.com/in/amin-alyari/"
-  }
+  },
+  {
+    "name": "Kimia Ebrahimi",
+    "linkedin": "https://www.linkedin.com/in/kimia-ebrahimi/",
+    "experience": [
+      "ERP Consultant"
+    ]
+  }  
 ]
