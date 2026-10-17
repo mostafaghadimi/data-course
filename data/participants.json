@@ -166,5 +166,16 @@
     "experience": [
       "Mobile Developer(Flutter and Native)"
     ]
-  }
+  },
+ {
+  "name": "Abolfazl Farahani",
+  "linkedin": "",
+  "avatar": "https://example.com/your-photo.jpg",
+  "education": [
+    "M.Sc of Material Engineering at Iran University of science and technology"
+  ],
+  "experience": [
+    "Qc And research"
+  ]
+} 
 ]
