@@ -210,5 +210,21 @@
     "experience": [
       "مهندس کنترل و ابزاردقیق در ناموران"
     ]
-  }
+  },
+  
+{
+  "name": "Hossein Allahdadi",
+  "linkedin": "https://www.linkedin.com/in/hossein-allahdadi/",
+  "avatar": "https://github.com/hosein-ald.png",
+  "education": [
+    "M.Sc. in Molecular Biotechnology, University of Turin",
+    "B.Sc. in Cellular and Molecular Biology _ Genetics, SBUK"
+  ],
+  "experience": [
+    "Bioinformatics and NGS",
+    "Large-Scale Data Analysis, Genomics, Transcriptomics and Epigenetics",
+    "Laboratory and Biomedical Equipment Consultant"
+  ]
+}
+
 ]
