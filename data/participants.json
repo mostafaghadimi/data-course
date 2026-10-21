@@ -260,14 +260,21 @@
       "Freelance Software & Web Developer",
       "Instructor in Linux, Python, and Related Technical Subjects"
     ]
-  }
+  },
+  {
+    "name": "Mohammad Soltani",
+    "avatar": "https://github.com/mohammadmahdisoltani.png",
+    "education": [
+    "دانشجوی کارشناسی مهندسی کامپیوتر، دانشگاه بیرجند"
+    ]
+  },
   {
     "name": "Ehsan Mohammadi",
     "linkedin": "https://www.linkedin.com/in/ehsan-mohammadi/",
     "avatar": "https://github.com/semohammadi.png",
     "education": [
       "M.Sc. in IT Management",
-    "B.Sc. in Software Engineering"
+      "B.Sc. in Software Engineering"
     ]
   }
 ]

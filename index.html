@@ -826,17 +826,22 @@
     <main class="wrap">
       <section class="hero">
         <div class="status">
-          <span><b>مهلت ثبت‌نام به پایان رسید</b></span>
-          <span>رایگان</span>
+          <span class="live"><span class="dot-pulse" aria-hidden="true"></span> ثبت‌نام باز است</span>
+          <span><b>رایگان</b></span>
           <span>آنلاین</span>
         </div>
 
         <p class="eyebrow">دورهٔ رایگان مهندسی داده و هوش مصنوعی</p>
         <h1>مهندسی داده و مهندسی هوش مصنوعی، <span class="accent">رایگان</span>.</h1>
         <p class="lead">
-          این دوره رایگان‌ه و به صورت آنلاین برگزار می‌شه. مهلت ثبت‌نام به اتمام
-          رسیده؛ برای دنبال‌کردن جلسه‌ها و اخبار دوره، در
-          <b>کانال تلگرام</b> عضو شید.
+          این دوره رایگان‌ه و قراره به صورت آنلاین برگزار شه. برای این‌که اطلاعاتی
+          راجع‌به شما داشته باشیم، لطفا فرم زیر رو پر کنید تا باهاتون تو
+          <b>تلگرام</b> در تماس باشیم.
+        </p>
+
+        <p class="hero-note">
+          <b>نکته:</b> قبل از عضویت در کانال تلگرام دوره لطفا مطمئن باشید که فرم
+          مربوط به ثبت اطلاعات‌تون رو پر کردید.
         </p>
 
         <div class="hero-cta">
@@ -855,11 +860,51 @@
           <span class="log-line" dir="ltr">
             <span class="stage">[ENROLL]</span>
             <span class="prompt">$</span>
-            <span class="cmd">./enroll --closed</span>
+            <span class="cmd">./enroll --write google-form</span>
           </span>
+          <span class="cap">ظرفیت محدود</span>
         </div>
 
-        <div class="frame closed-box">مهلت ثبت‌نام به اتمام رسید.</div>
+        <div class="frame">
+          <form id="enroll-form" novalidate>
+            <div class="field">
+              <label for="f-name">نام و نام‌خانوادگی <span class="req">*</span></label>
+              <input id="f-name" type="text" required autocomplete="name" />
+            </div>
+
+            <div class="field">
+              <label for="f-phone">شماره تماس <span class="req">*</span></label>
+              <input id="f-phone" type="tel" inputmode="tel" required autocomplete="tel" dir="ltr" />
+            </div>
+
+            <div class="field">
+              <label for="f-telegram">آی‌دی تلگرام <span class="req">*</span></label>
+              <input id="f-telegram" type="text" required placeholder="@username" dir="ltr" />
+            </div>
+
+            <fieldset class="field">
+              <legend>وضعیت کار / تحصیل <span class="req">*</span></legend>
+              <div class="opts">
+                <label class="opt"><input type="checkbox" name="status" value="دانشجو" /><span>دانشجو</span></label>
+                <label class="opt"><input type="checkbox" name="status" value="کارمند" /><span>کارمند</span></label>
+                <label class="opt"><input type="checkbox" name="status" value="کار و تحصیل هم‌زمان" /><span>کار و تحصیل هم‌زمان</span></label>
+                <label class="opt"><input type="checkbox" name="status" value="__other__" id="f-status-other" /><span>غیره</span></label>
+                <input id="f-status-other-text" type="text" class="other-text" placeholder="توضیح دهید…" disabled />
+              </div>
+            </fieldset>
+
+            <div class="field">
+              <label for="f-goal">هدف از شرکت در دوره <span class="opt-tag">(اختیاری، در حد یک خط)</span></label>
+              <input id="f-goal" type="text" />
+            </div>
+
+            <div class="actions">
+              <button type="submit" id="f-submit">ثبت‌نام</button>
+            </div>
+          </form>
+          <!-- Outside the form so it stays visible after the form is hidden -->
+          <p id="f-msg" class="msg" role="status" aria-live="polite" hidden></p>
+        </div>
       </section>
 
       <section class="course" id="sessions">
