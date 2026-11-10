@@ -328,5 +328,22 @@
     "B.Sc. in Computer Engineering, University of Zanjan",
     "M.Sc. in Computer Engineering, Institute for Advanced Studies in Basic Sciences (IASBS), Zanjan"
     ]
-  }
+  },
+
+{
+  "name": "Niloofar Mousavi",
+  "linkedin": "https://www.linkedin.com/in/niloofar-mousavi-8919a0146/",
+  "education": [
+    "کارشناسی مهندسی کامپیوتر، دانشگاه شهید بهشتی",
+    "کارشناسی ارشد مدیریت کسب‌وکار، دانشگاه الزهرا"
+    
+  ],
+  "experience": [
+    "برنامه‌نویس فرانت‌اند"
+  ]
+}
+
+
+
+  
 ]
