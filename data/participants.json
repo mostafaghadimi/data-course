@@ -328,5 +328,16 @@
     "B.Sc. in Computer Engineering, University of Zanjan",
     "M.Sc. in Computer Engineering, Institute for Advanced Studies in Basic Sciences (IASBS), Zanjan"
     ]
+  },
+  {
+    "name": "Parham Davari",
+    "linkedin": "https://www.linkedin.com/in/parhamdavari/",
+    "avatar": "https://github.com/parhamdavari.png",
+    "education": [
+      "M.Sc. in Software Engineering, University of Tehran"
+    ],
+    "experience": [
+      "AI Engineer at Oraclous"
+    ]
   }
 ]
