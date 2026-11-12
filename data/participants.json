@@ -352,12 +352,16 @@
       "AI Engineer at Oraclous"
     ]
   },
-{
-  "name": "Mehdi Balaee",
-  "linkedin": "https://www.linkedin.com/in/mahdi-balaee/",
-  "avatar": "https://github.com/nullshams.png",
-  "education": [
-    "B.Sc. in Software Engineering, Shamsipour Technical and Vocational College"
-  ]
-}
+  {
+    "name": "Mehdi Balaee",
+    "linkedin": "https://www.linkedin.com/in/mahdi-balaee/",
+    "avatar": "https://github.com/nullshams.png",
+    "education": [
+      "B.Sc. in Software Engineering, Shamsipour Technical and Vocational College"
+    ]
+  },
+  {
+    "name": "Niloofar Elahi",
+    "education":"B.sc. in statistics, University of Tehran"
+  }
 ]
